@@ -1,10 +1,10 @@
-"
-"Super vimrc
-"Wladston Viana
+"Ruhan Bidart
+"Based on Wladston Viana vimrc
 "
 
 " Enables packages instaled in the bundle directory.
 call pathogen#infect()
+call pathogen#helptags()
 
 " Disables old vi stuff we won't use
 set nocompatible
@@ -21,6 +21,7 @@ nmap <C-h> :set hls!<CR>:set hls?<CR> " Search Highlight
 set showmatch " Show matching bracket
 set ruler " Show line/column pertentage info on the bottom of the screen
 set backspace=indent,eol,start " allow backspace over autoindent, end of lines, start of a insert
+set hlsearch
 
 " lazy auto complete
 set wildmode=longest:full
@@ -34,6 +35,7 @@ set softtabstop=4 " a backspace will delete 4 spaces
 set expandtab "turn tabs into whitespace
 set shiftwidth=4 "indent width for autoindent
 filetype indent on "indent depends on filetype
+filetype plugin on
 
 "allow indented python commands
 inoremap # X#
@@ -169,3 +171,67 @@ set laststatus=2
 if $VIM_WORKSPACE == "ficrm"
     let g:syntastic_python_checker_args='--ignore=E302'
 endif
+
+" Python Mode configurations
+
+" Disable pylint checking every save
+let g:pymode_lint_write = 0
+
+" Load show documentation plugin
+let g:pymode_doc = 1
+
+" Load run code plugin
+let g:pymode_run = 1
+
+" Key for run python codesdf
+let g:pymode_run_key = '<C-c>r'
+
+" Key for set/unset breakpoint
+let g:pymode_breakpoint_key = '<C-c>b'
+
+" Code folding shortcuts
+"`za` - toggles
+"`zc` - closes
+"`zo` - opens
+"`zR` - open all
+"`zM` - close all
+
+" To work using tab inner a autocomplete popup
+function! InsertTabWrapper(direction)
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    elseif "backward" == a:direction
+        return "\<c-p>"
+    else
+        return "\<c-n>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
+inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
+
+" Maps F2 to toggle autoindent mode
+set pastetoggle=<F2>
+
+" Maps F3 to toggle line numbers
+function! g:ToggleNoRnuRnuMode()
+    if(&rnu == 1)
+        set nornu
+    else
+        set rnu
+    endif
+endfunc
+
+nnoremap <F3> :call g:ToggleNoRnuRnuMode()<cr>
+
+" Maps F4 to toggle between relative line number and common line numbers
+function! g:ToggleNuRnuMode()
+    if(&rnu == 1)
+        set nu
+    else
+        set rnu
+    endif
+endfunc
+
+
+nnoremap <F4> :call g:ToggleNuRnuMode()<cr>
