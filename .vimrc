@@ -235,3 +235,13 @@ endfunc
 
 
 nnoremap <F4> :call g:ToggleNuRnuMode()<cr>
+
+" Better navigation between tabs using CTRL+n and CTRL+p
+nmap <silent> <C-n> :tabnext<CR>
+nmap <silent> <C-p> :tabprev<CR>
+imap <silent> <C-n> <esc><C-n>
+imap <silent> <C-p> <esc><C-p>
+
+ca tn tabnew
+ca th tabp
+ca tl tabn
