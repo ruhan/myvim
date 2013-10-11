@@ -8,10 +8,10 @@ You need only to do it in your $HOME directory:
 $ git clone https://github.com/ruhan/myvim.git .vim
 $ cd .vim
 $ git submodule init
-$ git submodule 
+$ git submodule update
 $ ln -s $HOME/.vim/.vimrc $HOME/.vimrc
 
 That's it! Enjoy your new editor!
 
 * For use the vim-powerline you will need a little more work, go to 
-its remository and do your work.
+its repository and do your work.
