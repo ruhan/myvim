@@ -245,3 +245,12 @@ imap <silent> <C-p> <esc><C-p>
 ca tn tabnew
 ca th tabp
 ca tl tabn
+
+" Vimpdb
+highlight PdbCurrentLine guibg=DarkGreen ctermbg=Blue
+highlight PdbBreakpoint guibg=DarkRed ctermbg=DarkRed
+highlight PdbConditionalBreakpoint guibg=Purple ctermbg=Magenta
+highlight PdbTemporaryBreakpoint guibg=SlateBlue ctermbg=LightBlue
+
+" Clean unwanted spaces
+nmap <silent> <C-l> :%s/\s\+$//<CR>
