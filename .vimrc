@@ -41,7 +41,8 @@ filetype plugin on
 inoremap # X#
 
 "Set color scheme
-colorscheme badwolf
+"colorscheme badwolf
+colorscheme inkpot
 syntax enable
 
 " Paste mode
@@ -52,7 +53,7 @@ set showmode!
 
 " 79 char limit for Python and Js
 autocmd FileType python,javascript set textwidth=79
-autocmd FileType python,javascript set colorcolumn=80 
+autocmd FileType python,javascript set colorcolumn=80
 autocmd FileType python,javascript highlight ColorColumn ctermbg=Grey
 
 " 72 char limit for Git Commit Message
@@ -160,7 +161,7 @@ set undofile
 nnoremap <C-l> :Gblame<CR>
 
 " Syntastic
-let g:syntastic_mode_map = { 'mode': 'active', 
+let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['python', 'javascript'],
                            \ 'passive_filetypes': [] }
 
@@ -254,3 +255,29 @@ highlight PdbTemporaryBreakpoint guibg=SlateBlue ctermbg=LightBlue
 
 " Clean unwanted spaces
 nmap <silent> <C-l> :%s/\s\+$//<CR>
+
+" Indentation guidelines
+au VimEnter * IndentGuidesEnable
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+let g:indent_guides_guide_size=1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red ctermbg=darkgray
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=gray
+
+" Javascript guides
+" js folding
+" zf#j creates a fold from the cursor down # lines.
+" zf/ string creates a fold from the cursor to string .
+" zj moves the cursor to the next fold.
+" zk moves the cursor to the previous fold.
+" zo opens a fold at the cursor.
+" zO opens all folds at the cursor.
+" zm increases the foldlevel by one.
+" zM closes all open folds.
+" zr decreases the foldlevel by one.
+" zR decreases the foldlevel to zero -- all folds will be open.
+" zd deletes the fold at the cursor.
+" zE deletes all folds.
+" [z move to start of open fold.
+" ]z move to end of open fold.
+au FileType javascript call JavaScriptFold()
