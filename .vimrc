@@ -36,12 +36,15 @@ set expandtab "turn tabs into whitespace
 set shiftwidth=4 "indent width for autoindent
 filetype indent on "indent depends on filetype
 filetype plugin on
+filetype plugin indent on
 
 "allow indented python commands
 inoremap # X#
 
 "Set color scheme
+"colorscheme zenburn
 "colorscheme badwolf
+"colorscheme inkpot
 colorscheme inkpot
 syntax enable
 
@@ -169,10 +172,6 @@ let g:Powerline_symbols = 'fancy'
 let g:syntastic_javascript_checker = 'jslint'
 set laststatus=2
 
-if $VIM_WORKSPACE == "ficrm"
-    let g:syntastic_python_checker_args='--ignore=E302'
-endif
-
 " Python Mode configurations
 
 " Disable pylint checking every save
@@ -281,3 +280,11 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=gray
 " [z move to start of open fold.
 " ]z move to end of open fold.
 au FileType javascript call JavaScriptFold()
+
+" CoffeeScript fold
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+
+
+" Ctrlp 
+let g:ctrlp_map = '<c-a>'
+let g:ctrlp_cmd = 'CtrlP'
