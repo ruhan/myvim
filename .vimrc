@@ -45,7 +45,11 @@ inoremap # X#
 "colorscheme zenburn
 "colorscheme badwolf
 "colorscheme inkpot
-colorscheme inkpot
+set background=light
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+let g:solarized_termcolors = 256
+colorscheme solarized
 syntax enable
 
 " Paste mode
