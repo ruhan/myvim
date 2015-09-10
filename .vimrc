@@ -1,7 +1,10 @@
 "Ruhan Bidart
 "Based on Wladston Viana vimrc
 "
-
+" Plugins:
+" * vim-abolish: makes easy to make substitutions of words with different
+"   CaSe. You need only use %S/ instead of %s/ and the plugin handles the
+"   differences to you.
 " Enables packages instaled in the bundle directory.
 call pathogen#infect()
 call pathogen#helptags()
@@ -292,3 +295,9 @@ autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 " Ctrlp 
 let g:ctrlp_map = '<c-a>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" Cursor
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=4
+" Highlight line where cursor is
+set cursorline
