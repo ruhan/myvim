@@ -1,4 +1,4 @@
-Myvim
+Myvim - A VIM editor for a Python Programmer
 =====
 
 This is my vim editor otimized for python code.
