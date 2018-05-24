@@ -13,7 +13,7 @@ call pathogen#helptags()
 set nocompatible
 
 " Shares clipboard with operating system
-set clipboard=unnamed
+"set clipboard=unnamed
 
 " Search settings
 set incsearch " Incremental search
@@ -175,14 +175,32 @@ let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['python', 'javascript'],
                            \ 'passive_filetypes': [] }
 
-let g:Powerline_symbols = 'fancy'
-let g:syntastic_javascript_checker = 'jslint'
+"let g:Powerline_symbols = 'fancy'
+set t_Co=256
+let g:Powerline_symbols = 'unicode'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_python_checkers = ['pylint']
+
+" Close syntastic window when :q
+nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
+
+" jsx syntax also valid on simple js files
+let g:jsx_ext_required = 0
 set laststatus=2
 
 " Python Mode configurations
 
 " Disable pylint checking every save
-let g:pymode_lint_write = 0
+let g:pymode_lint_write = 1
 
 " Load show documentation plugin
 let g:pymode_doc = 1
@@ -292,7 +310,7 @@ au FileType javascript call JavaScriptFold()
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
 
-" Ctrlp 
+" Ctrlp
 let g:ctrlp_map = '<c-a>'
 let g:ctrlp_cmd = 'CtrlP'
 
