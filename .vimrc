@@ -48,12 +48,13 @@ inoremap # X#
 "colorscheme zenburn
 "colorscheme badwolf
 "colorscheme inkpot
-set background=light
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 let g:solarized_termcolors = 256
 colorscheme solarized
 syntax enable
+set background=dark
+"set background=light
 
 " Paste mode
 map <F2> :set invpaste paste?<CR>
@@ -97,14 +98,14 @@ set relativenumber
 set numberwidth=5 " Reserve 5 chars for line numbers
 
 " Toggle de linhas relativas/absolutas
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
+"function! NumberToggle()
+"  if(&relativenumber == 1)
+"    set number
+"  else
+"    set relativenumber
+"  endif
+"endfunc
+"nnoremap <C-n> :call NumberToggle()<cr>
 
 " handy ESC
 inoremap jk <Esc>
@@ -172,7 +173,7 @@ nnoremap <C-l> :Gblame<CR>
 
 " Syntastic
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['python', 'javascript'],
+                           \ 'active_filetypes': ['python', 'javascript', 'text'],
                            \ 'passive_filetypes': [] }
 
 "let g:Powerline_symbols = 'fancy'
@@ -184,10 +185,14 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_python_checkers = ['pylint']
+"let g:syntastic_text_checkers = ['language_check']
+"let g:syntastic_text_language_check_args = '--language=en-US'
+"let g:syntastic_aggregate_errors = 1
 
 " Close syntastic window when :q
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
@@ -198,6 +203,7 @@ let g:jsx_ext_required = 0
 set laststatus=2
 
 " Python Mode configurations
+let g:pymode = 0
 
 " Disable pylint checking every save
 let g:pymode_lint_write = 1
@@ -214,12 +220,16 @@ let g:pymode_run_key = '<C-c>r'
 " Key for set/unset breakpoint
 let g:pymode_breakpoint_key = '<C-c>b'
 
+let g:pymode_rope=0
+
 " Code folding shortcuts
 "`za` - toggles
 "`zc` - closes
 "`zo` - opens
 "`zR` - open all
 "`zM` - close all
+set foldmethod=indent
+set foldnestmax=2
 
 " To work using tab inner a autocomplete popup
 function! InsertTabWrapper(direction)
@@ -277,6 +287,13 @@ highlight PdbBreakpoint guibg=DarkRed ctermbg=DarkRed
 highlight PdbConditionalBreakpoint guibg=Purple ctermbg=Magenta
 highlight PdbTemporaryBreakpoint guibg=SlateBlue ctermbg=LightBlue
 
+map <Leader>p :call InsertLine()<CR>
+
+function! InsertLine()
+  let trace = expand("import pdb; pdb.set_trace()")
+    execute "normal o".trace
+endfunction
+
 " Clean unwanted spaces
 nmap <silent> <C-l> :%s/\s\+$//<CR>
 
@@ -319,3 +336,6 @@ let g:ctrlp_cmd = 'CtrlP'
 set scrolloff=4
 " Highlight line where cursor is
 set cursorline
+
+" Create a command w!! that can be used to save the file as sudo
+cmap w!! w !sudo tee > /dev/null %
