@@ -13,7 +13,7 @@ call pathogen#helptags()
 set nocompatible
 
 " Shares clipboard with operating system
-"set clipboard=unnamed
+set clipboard=unnamed
 
 " Search settings
 set incsearch " Incremental search
@@ -63,9 +63,9 @@ au InsertLeave * set nopaste " exit paste mode when leaving insert mode.
 set showmode!
 
 " 79 char limit for Python and Js
-autocmd FileType python,javascript set textwidth=79
-autocmd FileType python,javascript set colorcolumn=80
-autocmd FileType python,javascript highlight ColorColumn ctermbg=Grey
+autocmd FileType python3,javascript set textwidth=79
+autocmd FileType python3,javascript set colorcolumn=80
+autocmd FileType python3,javascript highlight ColorColumn ctermbg=Grey
 
 " 72 char limit for Git Commit Message
 autocmd FileType gitcommit set textwidth=72
@@ -173,7 +173,7 @@ nnoremap <C-l> :Gblame<CR>
 
 " Syntastic
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['python', 'javascript', 'text'],
+                           \ 'active_filetypes': ['python3', 'javascript', 'text'],
                            \ 'passive_filetypes': [] }
 
 "let g:Powerline_symbols = 'fancy'
@@ -221,6 +221,10 @@ let g:pymode_run_key = '<C-c>r'
 let g:pymode_breakpoint_key = '<C-c>b'
 
 let g:pymode_rope=0
+
+" Enable black execution after each save
+" * Black is a python code formatter!
+autocmd BufWritePre *.py execute ':Black'
 
 " Code folding shortcuts
 "`za` - toggles
