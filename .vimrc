@@ -225,6 +225,12 @@ let g:pymode_rope=0
 " Enable black execution after each save
 " * Black is a python code formatter!
 autocmd BufWritePre *.py execute ':Black'
+let g:black_linelength=80
+
+" Enable prettier (for js) after each save
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
 
 " Code folding shortcuts
 "`za` - toggles
@@ -343,3 +349,7 @@ set cursorline
 
 " Create a command w!! that can be used to save the file as sudo
 cmap w!! w !sudo tee > /dev/null %
+
+" Highlight columns after 80
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
